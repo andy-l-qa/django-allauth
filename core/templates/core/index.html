@@ -1,4 +1,6 @@
 {% extends 'core/base.html' %}
+{% load socialaccount %}
+
 
 {% block title %}Public Page{% endblock %}
 
@@ -7,4 +9,10 @@
         <h1>Public Page</h1>
         <p>You can see this page because this page is public.</p>
     </div>
+
+{% if not user.is_authenticated %}
+    <h2>Sign In</h2>
+    <a href="{% provider_login_url "google" next="/secret" %}">Google</a>
+{% endif %}
+    
 {% endblock %}

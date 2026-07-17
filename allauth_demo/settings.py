@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -135,10 +137,22 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = 'core:secret'
 
-ACCOUNT_SIGNUP_FIELDS = ['email', 'username*', 'password1*', 'password2*']
-# ACCOUNT_SIGNUP_FIELDS = ['email*']
-ACCOUNT_LOGIN_METHODS = {"username", "email"}
+# ACCOUNT_SIGNUP_FIELDS = ['email', 'username*', 'password1*', 'password2*']
+# # ACCOUNT_SIGNUP_FIELDS = ['email*']
+# ACCOUNT_LOGIN_METHODS = {"username", "email"}
 
 # ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.CustomSignupForm'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'EMAIL_AUTHENTICATION': True,
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+    }
+}
+
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
